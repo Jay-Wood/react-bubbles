@@ -30,6 +30,7 @@ const ColorList = ({ colors, updateColors }) => {
     .delete(`http://localhost:5000/api/colors/${color.id}`)
     .then(res => {
       console.log("Delete res", res)
+      updateColors(colors.filter(c => c.id != color.id) )
     })
     .catch(err => console.log("Delete Error: ", err.response.data));
   };
