@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
 import axios from "axios";
 
-const Login = () => {
+const Login = (props) => {
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
   const [credentials, setCredentials] = useState({
@@ -18,12 +17,13 @@ const Login = () => {
   }
 
   const routeToColors = () => {
-    // props.history.push("/PrivateRoute")
+    props.history.push("/BubblePage")
   }  
 
   const handleSubmit = e => {
     e.preventDefault();
     console.log("username+pw", credentials.username, credentials.password)
+    console.log("creds before post req: ", credentials)
     axios
         .post("http://localhost:5000/api/login", credentials)
         .then(res => {
@@ -32,7 +32,6 @@ const Login = () => {
         })
         .catch(err => console.log("Error", err.response))
   }
-
 
   return(
     <div>   
